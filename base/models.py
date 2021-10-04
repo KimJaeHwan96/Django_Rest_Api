@@ -1,3 +1,7 @@
 from django.db import models
+from django.db.models import DateTimeField
 
-# Create your models here.
+
+class TestModel(models.Model):
+    created_date = DateTimeField(auto_now=True)
+    last_modified_date = DateTimeField(auto_now=True)
