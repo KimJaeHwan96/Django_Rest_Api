@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models import DateTimeField
 
+from base.manager import BaseManager
+
 
 class BaseModel(models.Model):
     class Meta:
@@ -11,4 +13,4 @@ class BaseModel(models.Model):
 
 
 class FakeModel(BaseModel):
-    pass
+    objects = BaseManager()
