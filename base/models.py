@@ -10,5 +10,5 @@ class BaseModel(models.Model):
     last_modified_date = DateTimeField(auto_now=True)
 
 
-class TestModel(BaseModel):
+class FakeModel(BaseModel):
     pass
