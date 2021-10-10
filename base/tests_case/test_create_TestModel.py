@@ -1,11 +1,10 @@
-from django.test import TestCase
 from django.utils import timezone
 
 from base.models import FakeModel
+from base.test import BaseTestCase
 
 
-# unittest.TestCase --(상속)-> django.test.SimpleTestCase --(상속)-> django.test.TransactionTestCase --(상속)-> django.test.TestCase
-class TestModelTest(TestCase):
+class TestModelTest(BaseTestCase):
     def setUp(self):
         pass
 
