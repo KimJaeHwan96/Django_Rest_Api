@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from base.views import FakeGenericView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('fake-models/', FakeGenericView.as_view()),
+    path('fake-models/<int:pk>/', FakeGenericView.as_view())
 ]
