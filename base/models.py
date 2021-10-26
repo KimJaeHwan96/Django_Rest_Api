@@ -9,7 +9,7 @@ class BaseModel(models.Model):
         abstract = True
 
     created_date = DateTimeField(auto_now=True)
-    last_modified_date = DateTimeField(auto_now=True)
+    last_modified_date = DateTimeField(auto_now_add=True)
 
 
 class FakeModel(BaseModel):
