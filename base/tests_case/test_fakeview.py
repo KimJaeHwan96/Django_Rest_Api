@@ -11,8 +11,16 @@ class GenericViewTest(BaseTestCase):
         self.get(f'/fake-models/{fake_model.id}/')
         self.response_200()
         response = self.last_response.json()
-        self.assertEqual(fake_model.created_date, response['created_date'])
-        self.assertEqual(fake_model.last_modified_date, response['last_modified_date'])
+        self.assertEqual(fake_model.created_date.strftime('%Y-%m-%d %H:%M:%S'), response['created_date'])
+        self.assertEqual(fake_model.last_modified_date.strftime('%Y-%m-%d %H:%M:%S'), response['last_modified_date'])
+
+    def test_get_fake_model_all_view(self):
+        fake_model = self.fake_model
+        self.get(f'/fake-models/')
+        self.response_200()
+        response = self.last_response.json()[0]
+        self.assertEqual(fake_model.created_date.strftime('%Y-%m-%d %H:%M:%S'), response['created_date'])
+        self.assertEqual(fake_model.last_modified_date.strftime('%Y-%m-%d %H:%M:%S'), response['last_modified_date'])
 
     def test_post_fake_model_view(self):
         self.post('/fake-models/', data={})

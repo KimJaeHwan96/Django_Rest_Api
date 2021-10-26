@@ -1,5 +1,6 @@
 import ast
 from copy import deepcopy
+from datetime import datetime
 
 from django.http import JsonResponse
 from django.views.generic import View
@@ -23,12 +24,18 @@ class FakeGenericView(View):
         if id:
             obj = self.model.objects.get(id=id)
             obj.__dict__.pop('_state')
+            for key, value in obj.__dict__.items():
+                if isinstance(value, datetime):
+                    setattr(obj, f'{key}', value.strftime('%Y-%m-%d %H:%M:%S'))
             return JsonResponse(data=obj.__dict__)
         else:
             queryset = self.model.objects.all()
             queryset_list = []
             for query in queryset:
                 query.__dict__.pop('_state')
+                for key, value in query.__dict__.items():
+                    if isinstance(value, datetime):
+                        setattr(query, f'{key}', value.strftime('%Y-%m-%d %H:%M:%S'))
                 queryset_list.append(query.__dict__)
             return JsonResponse(data=queryset_list, safe=False)
 
