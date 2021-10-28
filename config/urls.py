@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from base.views import FakeGenericView
+from base.views import FakeGenericView, FakeAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # 테스트 및 공부를 위한 URL
     path('fake-models/', FakeGenericView.as_view()),
-    path('fake-models/<int:pk>/', FakeGenericView.as_view())
+    path('fake-models/<int:pk>/', FakeGenericView.as_view()),
+    path('fake-models-for-api-view/', FakeAPIView.as_view()),
+    path('fake-models-for-api-view/<int:pk>/', FakeAPIView.as_view()),
 ]

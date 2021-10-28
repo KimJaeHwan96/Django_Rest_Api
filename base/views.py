@@ -4,6 +4,9 @@ from datetime import datetime
 
 from django.http import JsonResponse
 from django.views.generic import View
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from base.models import FakeModel
 
@@ -69,3 +72,24 @@ class FakeGenericView(View):
         obj.delete()
         deleted_obj.pop('_state')
         return JsonResponse(data=deleted_obj, status=204)
+
+
+class FakeAPIView(APIView):
+    """
+    APIView 클래스 의 추가 기능
+    renderer_classes
+    parser_classes
+    authentication_classes
+    throttle_classes
+    permission_classes
+    content_negotiation_class
+    metadata_class
+    versioning_class
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        return Response(status=200)
+
+    def post(self, request, *args, **kwargs):
+        return Response(status=201)
