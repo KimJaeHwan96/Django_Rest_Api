@@ -12,11 +12,11 @@ class GenericViewTest(BaseTestCase):
     def test_get_fake_model_view(self):
         fake_model = self.fake_model
         self.get(f'/fake-models-for-api-view/{fake_model.id}/')
-        self.response_200()
+        self.response_403()
 
     def test_get_fake_model_view_query_string(self):
         self.get('/fake-models-for-api-view/?created_date=2021-10-24')
-        self.response_200()
+        self.response_403()
 
     def test_post_fake_model_view(self):
         self.post('/fake-models-for-api-view/')
