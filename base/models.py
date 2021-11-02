@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import DateTimeField
+from django.db.models import DateTimeField, JSONField
 
 from base.manager import BaseManager
 
@@ -12,7 +12,14 @@ class TimeStamp(models.Model):
     last_modified_date = DateTimeField(auto_now_add=True)
 
 
-class BaseModel(TimeStamp):
+class JsonColumn(models.Model):
+    class Meta:
+        abstract = True
+
+    json = JSONField(blank=True, null=True)
+
+
+class BaseModel(TimeStamp, JsonColumn):
     class Meta:
         abstract = True
 
